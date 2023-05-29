@@ -180,7 +180,8 @@ function isInMandelbrotSet(c) {
 function isInJuliaSet(c, z) {
     let z_0 = new Complex(0, 0);
     for (let i = 0; i < MAX_ITERATIONS_JULIA; i++){
-        z_0 = z.square().add(c);
+        if (i==0) z_0 = z.square().add(c);
+        else z_0 = z_0.square().add(c);
         if (z_0.magnitude() > 2){
             return false;
         }
