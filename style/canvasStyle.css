@@ -1,0 +1,46 @@
+#canvas-container {
+    width: 1600px; /* Ancho suficiente para los tres canvas y los rectángulos */
+    position: relative; /* Establecer posición relativa para los canvas hijos */
+}
+  
+#canvas-container canvas {
+    position: absolute; /* Establecer posición absoluta para superponer los dos primeros canvas */
+    width: 800px; /* Establecer el mismo ancho y alto para ambos canvas */
+    height: 600px;
+    left: 0; /* Colocar ambos canvas en la esquina superior izquierda */
+    top: 0;
+}
+
+#canvasMandelbrot {
+
+    border: 2px solid blue;
+    z-index: 1; /* Establecer z-index para superponer el segundo canvas sobre el primero */
+}
+
+#pointCanvas {
+    z-index: 2; /* Establecer z-index para que el primero canvas quede detrás del segundo canvas */
+}
+
+#canvasJul {
+    border: 2px solid blue;
+    display: inline-block; /* Colocar el tercer canvas en línea */
+    position: relative; /* Establecer posición relativa para poder posicionar el rectángulo */
+    margin-left: 820px; /* Margen izquierdo para separar el tercer canvas del segundo */
+}
+#label-container {
+    position: relative;
+    top: 630px; /* Ajustar la posición vertical del div que contiene el label y el input */
+    left: 20px; /* Ajustar la posición horizontal del div que contiene el label y el input */
+    margin-top: 10px; /* Espacio entre los rectángulos y el div que contiene el label y el input */
+}
+
+#complex-number {
+    display: inline-block;
+}
+
+label {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px; /* Agregar un pequeño espacio entre el texto y el cuadro de texto */
+}
+

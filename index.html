@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Conjunto de Mandelbrot</title>
+    <link rel=StyleSheet href="style/canvasStyle.css" type="text/css">
+</head>
+<body>
+    <div id="canvas-container">
+        <div class="canvas-container">
+            <canvas id="canvasMandelbrot" width="800" height="600"></canvas>
+            <canvas id="pointCanvas" width="800" height="600" data-x="0" data-y="0"></canvas>
+        </div>
+        <div id="label-container">
+            <label for="complex-number">Número complejo:</label>
+            <input type="text" id="complex-number" readonly>
+            <input id="btnRefresh" type="button" onclick="location.reload()" value="Reiniciar">
+        </div> 
+        <canvas id="canvasJul" width="800" height="600"></canvas>
+        
+    </div> 
+    <script src="lib/jquery.min.js"></script>
+    <script src="Prueba_complex.js"></script>
+</body>
+</html>
+
