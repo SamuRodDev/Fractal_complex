@@ -63,6 +63,7 @@ const DEFAULT_MIN_Y_JULIA = -2;
 const DEFAULT_MAX_Y_JULIA = 2;
 const DEFAULT_COMPLEX = new Complex(0, 0);
 const pointRadius = 5;
+const canvasBorder = (canvasMandelbrot[0].offsetWidth - canvasMandelbrot[0].width) / 2;
 let minX = DEFAULT_MIN_X_MAND;
 let maxX = DEFAULT_MAX_X_MAND;
 let minY = DEFAULT_MIN_Y_MAND;
@@ -236,6 +237,8 @@ function drawMandelbrotSet() {
   
     // Dibujar el punto rojo en el canvas pointCanvas
     const pixel = complexToPixel(DEFAULT_COMPLEX);
+    pixel.real = pixel.real + canvasBorder;
+    pixel.imaginary = pixel.imaginary + canvasBorder;
     ctxPoint.clearRect(0, 0, pointCanvas[0].width, pointCanvas[0].height);
     ctxPoint.fillStyle = 'red';
     ctxPoint.beginPath();

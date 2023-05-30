@@ -18,7 +18,7 @@
 }
 
 #pointCanvas {
-    z-index: 2; /* Establecer z-index para que el primero canvas quede detrás del segundo canvas */
+    z-index: 2; /* Establecer z-index para que el primer canvas quede detrás del segundo canvas */
 }
 
 #canvasJul {
