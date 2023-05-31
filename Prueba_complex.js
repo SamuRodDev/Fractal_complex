@@ -57,8 +57,8 @@ const DEFAULT_MIN_X_MAND = -2;
 const DEFAULT_MAX_X_MAND = 1;
 const DEFAULT_MIN_Y_MAND = -1.5;
 const DEFAULT_MAX_Y_MAND = 1.5;
-const DEFAULT_MIN_X_JULIA = -2.5;
-const DEFAULT_MAX_X_JULIA = 2.5;
+const DEFAULT_MIN_X_JULIA = -2;
+const DEFAULT_MAX_X_JULIA = 2;
 const DEFAULT_MIN_Y_JULIA = -2;
 const DEFAULT_MAX_Y_JULIA = 2;
 const DEFAULT_COMPLEX = new Complex(0, 0);
@@ -103,10 +103,10 @@ pointCanvas.on('mousemove', function(event) {
         const oldX = parseFloat(pointCanvas.attr('data-x'));
         const oldY = parseFloat(pointCanvas.attr('data-y'));
         const centerAux = complexToPixel(DEFAULT_COMPLEX);
-        const leftAux = 2 - centerAux.real + pointRadius;
-        const rightAux = 802 - centerAux.real - pointRadius;
-        const topAux = 2 - centerAux.imaginary + pointRadius;
-        const bottomAux = 602 - centerAux.imaginary - pointRadius;
+        const leftAux = 0 - centerAux.real + pointRadius;
+        const rightAux = canvasMandelbrot[0].width - centerAux.real - pointRadius;
+        const topAux = 0 - centerAux.imaginary + pointRadius;
+        const bottomAux = canvasMandelbrot[0].height - centerAux.imaginary - pointRadius;
         let newX = oldX + deltaX;
         let newY = oldY + deltaY;
 
