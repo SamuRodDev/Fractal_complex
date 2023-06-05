@@ -54,13 +54,13 @@ class Complex {
 const MAX_ITERATIONS = 100;
 const MAX_ITERATIONS_JULIA = 100;
 const DEFAULT_MIN_X_MAND = -2;
-const DEFAULT_MAX_X_MAND = 1;
-const DEFAULT_MIN_Y_MAND = -1.5;
-const DEFAULT_MAX_Y_MAND = 1.5;
-const DEFAULT_MIN_X_JULIA = -2;
-const DEFAULT_MAX_X_JULIA = 2;
-const DEFAULT_MIN_Y_JULIA = -2;
-const DEFAULT_MAX_Y_JULIA = 2;
+const DEFAULT_MAX_X_MAND = 0.5;
+const DEFAULT_MIN_Y_MAND = -1.25;
+const DEFAULT_MAX_Y_MAND = 1.25;
+const DEFAULT_MIN_X_JULIA = -1.75;
+const DEFAULT_MAX_X_JULIA = 1.75;
+const DEFAULT_MIN_Y_JULIA = -1.75;
+const DEFAULT_MAX_Y_JULIA = 1.75;
 const DEFAULT_COMPLEX = new Complex(0, 0);
 const pointRadius = 5;
 const canvasBorder = (canvasMandelbrot[0].offsetWidth - canvasMandelbrot[0].width) / 2;
@@ -134,7 +134,6 @@ pointCanvas.on('mousemove', function(event) {
 // Controlador de eventos para cuando se suelta el botón del mouse
 pointCanvas.on('mouseup', function() {
     dragging = false;
-    cleanJuliaSet();
     drawJuliaSet();
 });
 
@@ -189,24 +188,17 @@ function isInJuliaSet(c, z) {
     }
     return true;
 }
-//Función que limpia el canvas de Julia
-function cleanJuliaSet(){
-    for (let x = 0; x < canvasJul[0].width; x++) {
-        for (let y = 0; y < canvasJul[0].height; y++) {
-            ctxJulia.fillStyle = 'white';
-            ctxJulia.fillRect(x, y, 1, 1);
-        }
-    }
-}
+
 // Función que dibuja el conjunto de Julia en su canvas
 function drawJuliaSet() {
+    let zJul = new Complex (0,0);
     for (let x = 0; x < canvasJul[0].width; x++) {
         for (let y = 0; y < canvasJul[0].height; y++) {
             minX = DEFAULT_MIN_X_JULIA;
             maxX = DEFAULT_MAX_X_JULIA;
             minY = DEFAULT_MIN_Y_JULIA;
             maxY = DEFAULT_MAX_Y_JULIA;
-            const zJul = pixelToComplex({x, y});
+            zJul = pixelToComplex({x, y});
             if (isInJuliaSet(juliaComplex, zJul)) {
                 ctxJulia.fillStyle = 'black';
             } else {
@@ -223,9 +215,10 @@ function drawJuliaSet() {
 
 // Función que dibuja el conjunto de Mandelbrot en su canvas
 function drawMandelbrotSet() {
+    let c = new Complex (0,0);
     for (let x = 0; x < canvasMandelbrot[0].width; x++) {      //Recorre el eje X del canvas
       for (let y = 0; y < canvasMandelbrot[0].height; y++) {   //Recorre el eje Y del canvas
-        const c = pixelToComplex({ x, y });                 //Se convierte el píxel de coordenadas x e y en un número complejo
+        c = pixelToComplex({ x, y });                 //Se convierte el píxel de coordenadas x e y en un número complejo
         if (isInMandelbrotSet(c)) {                         //Comprueba que el número complejo forma parte del set de Mandelbrot
           ctxMandelbrot.fillStyle = 'black';                    //Si es así, pintará el pixel de negro
         } else {

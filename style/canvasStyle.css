@@ -5,8 +5,8 @@
   
 #canvas-container canvas {
     position: absolute; /* Establecer posición absoluta para superponer los dos primeros canvas */
-    width: 600px; /* Establecer el mismo ancho y alto para ambos canvas */
-    height: 600px;
+    width: 300px; /* Establecer el mismo ancho y alto para ambos canvas */
+    height: 300px;
     left: 0; /* Colocar ambos canvas en la esquina superior izquierda */
     top: 0;
 }
@@ -25,11 +25,11 @@
     border: 2px solid blue;
     display: inline-block; /* Colocar el tercer canvas en línea */
     position: relative; /* Establecer posición relativa para poder posicionar el rectángulo */
-    margin-left: 620px; /* Margen izquierdo para separar el tercer canvas del segundo */
+    margin-left: 320px; /* Margen izquierdo para separar el tercer canvas del segundo */
 }
 #label-container {
     position: relative;
-    top: 630px; /* Ajustar la posición vertical del div que contiene el label y el input */
+    top: 330px; /* Ajustar la posición vertical del div que contiene el label y el input */
     left: 20px; /* Ajustar la posición horizontal del div que contiene el label y el input */
     margin-top: 10px; /* Espacio entre los rectángulos y el div que contiene el label y el input */
 }
