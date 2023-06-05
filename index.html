@@ -6,19 +6,25 @@
     <link rel=StyleSheet href="style/canvasStyle.css" type="text/css">
 </head>
 <body>
-    <div id="canvas-container" class="canvas_container">
+    <div id="label_container">
+        <label id="label_complex" for="complex_number">Número complejo:</label>
+        <input type="text" id="complex_number" readonly>
+        <input id="btnRefresh" type="button" onclick="location.reload()" value="Reiniciar">
+    </div> 
+    <br>
+    <div id="canvas_container">
         <div class="mandelbrot_container">
             <canvas id="canvasMandelbrot" width="300" height="300"></canvas>
             <canvas id="pointCanvas" width="300" height="300" data-x="0" data-y="0"></canvas>
         </div>
-        <div id="label-container">
-            <label for="complex-number">Número complejo:</label>
-            <input type="text" id="complex-number" readonly>
-            <input id="btnRefresh" type="button" onclick="location.reload()" value="Reiniciar">
-        </div> 
-        <canvas id="canvasJul" width="300" height="300"></canvas>
-        
+        <div class="julia_container">
+            <canvas id="canvasJul" width="300" height="300"></canvas>
+        </div>        
     </div> 
+    <div id="canvas_buttons">
+        <input type="button" id="btnMandelbrot" value="Seleccionar">
+        <input type="button" id="btnJulia" value="Seleccionar">
+    </div>
     <script src="lib/jquery.min.js"></script>
     <script src="Prueba_complex.js"></script>
 </body>

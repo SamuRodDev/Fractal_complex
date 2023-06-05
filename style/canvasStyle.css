@@ -1,19 +1,27 @@
-#canvas-container {
-    width: 650px; /* Ancho suficiente para los tres canvas y los rectángulos */
+#canvas_container {
+    width: 600px; /* Ancho suficiente para los tres canvas y los rectángulos */
+    height: 300px;
     position: relative; /* Establecer posición relativa para los canvas hijos */
 }
   
-#canvas-container canvas {
+#canvas_container canvas {
     position: absolute; /* Establecer posición absoluta para superponer los dos primeros canvas */
     width: 300px; /* Establecer el mismo ancho y alto para ambos canvas */
-    height: 300px;
+    height: auto;
     left: 0; /* Colocar ambos canvas en la esquina superior izquierda */
     top: 0;
 }
+.mandelbrot_container {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: 0;
+    top: 0;
+    border: 2px solid blue;
+}
 
 #canvasMandelbrot {
-
-    border: 2px solid blue;
+    
     z-index: 1; /* Establecer z-index para superponer el segundo canvas sobre el primero */
 }
 
@@ -27,20 +35,54 @@
     position: relative; /* Establecer posición relativa para poder posicionar el rectángulo */
     margin-left: 320px; /* Margen izquierdo para separar el tercer canvas del segundo */
 }
-#label-container {
+
+#label_container {
+    width: 620px;
     position: relative;
-    top: 330px; /* Ajustar la posición vertical del div que contiene el label y el input */
-    left: 20px; /* Ajustar la posición horizontal del div que contiene el label y el input */
-    margin-top: 10px; /* Espacio entre los rectángulos y el div que contiene el label y el input */
+    display: grid;
+    margin-top: 10px;
 }
 
-#complex-number {
-    display: inline-block;
+#label_complex {
+    grid-column: 1;
+    grid-row: 1;
+    width: auto;
+    justify-self: end;
+    margin-right: 10px;
 }
 
-label {
-    display: inline-block;
-    margin-right: 5px;
-    margin-bottom: 5px; /* Agregar un pequeño espacio entre el texto y el cuadro de texto */
+#complex_number {
+    grid-column: 2;
+    grid-row: 1;
+    width: auto;
+    justify-self: start;
 }
 
+#btnRefresh {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    width: auto;
+    justify-self: center;
+    margin-top: 10px;
+}
+
+#canvas_buttons{
+    width: 620px;
+    position: relative;
+    display: grid;
+    margin-top: 10px;
+}
+
+#btnMandelbrot{
+    grid-column: 1;
+    grid-row: 1;
+    width: 100px;
+    justify-self: center;
+}
+
+#btnJulia{
+    grid-column: 2;
+    grid-row: 1;
+    width: 100px;
+    justify-self: center;
+}

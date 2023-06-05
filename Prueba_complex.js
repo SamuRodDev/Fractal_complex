@@ -133,7 +133,7 @@ pointCanvas.on('mouseup', function() {
 
 //Función que actualiza el textBox 'complex-number' en función de donde esté situado el punto rojo
 function updateTextBox(c) {
-    $('#complex-number').val(c.toString());
+    $('#complex_number').val(c.toString());
 }
 
 //Función que convierte un número compejo en un pixel del canvas
