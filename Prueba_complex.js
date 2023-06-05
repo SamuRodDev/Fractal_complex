@@ -96,7 +96,7 @@ pointCanvas.on('mousemove', function(event) {
         const deltaY = event.offsetY - mouseY;
         const oldX = parseFloat(pointCanvas.attr('data-x'));
         const oldY = parseFloat(pointCanvas.attr('data-y'));
-        const centerAux = complexToPixel(DEFAULT_COMPLEX);
+        const centerAux = complexToPixel(default_complex);
         const leftAux = 0 - centerAux.real + pointRadius;
         const rightAux = canvasMandelbrot[0].width - centerAux.real - pointRadius;
         const topAux = 0 - centerAux.imaginary + pointRadius;
