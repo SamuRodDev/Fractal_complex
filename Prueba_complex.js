@@ -1,10 +1,7 @@
 // Obtener los elementos del DOM
 const canvasMandelbrot = $('#canvasMandelbrot');
 const pointCanvas = $('#pointCanvas');
-const complexNumber = $('#complex-number');
 const canvasJul = $('#canvasJul');
-const canvasContainer = $('#canvas-container');
-const rectanglesContainer = $('#rectangles-container');
 
 //Definición clase Complex
 class Complex {
@@ -51,29 +48,26 @@ class Complex {
   }
 
 // Variables para el dibujo del set de Mandelbrot y del set de Julia
-const MAX_ITERATIONS = 100;
-const MAX_ITERATIONS_JULIA = 100;
-const DEFAULT_MIN_X_MAND = -2;
-const DEFAULT_MAX_X_MAND = 0.5;
-const DEFAULT_MIN_Y_MAND = -1.25;
-const DEFAULT_MAX_Y_MAND = 1.25;
-const DEFAULT_MIN_X_JULIA = -1.75;
-const DEFAULT_MAX_X_JULIA = 1.75;
-const DEFAULT_MIN_Y_JULIA = -1.75;
-const DEFAULT_MAX_Y_JULIA = 1.75;
-const DEFAULT_COMPLEX = new Complex(0, 0);
+const max_iterations = 100;
+const default_min_x_mand = -2;
+const default_max_x_mand = 0.5;
+const default_min_y_mand = -1.25;
+const default_max_y_mand = 1.25;
+const default_min_x_julia = -1.75;
+const default_max_x_julia = 1.75;
+const default_min_y_julia = -1.75;
+const default_max_y_julia = 1.75;
+const default_complex = new Complex(0, 0);
 const pointRadius = 5;
 const canvasBorder = (canvasMandelbrot[0].offsetWidth - canvasMandelbrot[0].width) / 2;
-let minX = DEFAULT_MIN_X_MAND;
-let maxX = DEFAULT_MAX_X_MAND;
-let minY = DEFAULT_MIN_Y_MAND;
-let maxY = DEFAULT_MAX_Y_MAND;
+let minX = default_min_x_mand;
+let maxX = default_max_x_mand;
+let minY = default_min_y_mand;
+let maxY = default_max_y_mand;
 let dragging = false;
 let mouseX = 0;
 let mouseY = 0; 
-let offset = new Complex(0, 0);
-let currentComplex = DEFAULT_COMPLEX;
-let juliaComplex = DEFAULT_COMPLEX;
+let juliaComplex = default_complex;
 
 //Obtener las coordenadas del canvas de Mandelbrot
 const mandelbrotRect = canvasMandelbrot[0].getBoundingClientRect();
@@ -167,7 +161,7 @@ function map(value, min1, max1, min2, max2) {
 // Función que determina si un número pertenece al conjunto de Mandelbrot
 function isInMandelbrotSet(c) {
     let z = new Complex(0, 0);
-    for (let i = 0; i < MAX_ITERATIONS; i++) {
+    for (let i = 0; i < max_iterations; i++) {
         z = z.square().add(c);
         if (z.magnitude() > 2) {
             return false;
@@ -179,7 +173,7 @@ function isInMandelbrotSet(c) {
 // Función que determina si un número pertenece al conjunto de Julia
 function isInJuliaSet(c, z) {
     let z_0 = new Complex(0, 0);
-    for (let i = 0; i < MAX_ITERATIONS_JULIA; i++){
+    for (let i = 0; i < max_iterations; i++){
         if (i==0) z_0 = z.square().add(c);
         else z_0 = z_0.square().add(c);
         if (z_0.magnitude() > 2){
@@ -194,10 +188,10 @@ function drawJuliaSet() {
     let zJul = new Complex (0,0);
     for (let x = 0; x < canvasJul[0].width; x++) {
         for (let y = 0; y < canvasJul[0].height; y++) {
-            minX = DEFAULT_MIN_X_JULIA;
-            maxX = DEFAULT_MAX_X_JULIA;
-            minY = DEFAULT_MIN_Y_JULIA;
-            maxY = DEFAULT_MAX_Y_JULIA;
+            minX = default_min_x_julia;
+            maxX = default_max_x_julia;
+            minY = default_min_y_julia;
+            maxY = default_max_y_julia;
             zJul = pixelToComplex({x, y});
             if (isInJuliaSet(juliaComplex, zJul)) {
                 ctxJulia.fillStyle = 'black';
@@ -207,10 +201,10 @@ function drawJuliaSet() {
             ctxJulia.fillRect(x, y, 1, 1);
         }
     }
-    minX = DEFAULT_MIN_X_MAND;
-    maxX = DEFAULT_MAX_X_MAND;
-    minY = DEFAULT_MIN_Y_MAND;
-    maxY = DEFAULT_MAX_Y_MAND;
+    minX = default_min_x_mand;
+    maxX = default_max_x_mand;
+    minY = default_min_y_mand;
+    maxY = default_max_y_mand;
 }
 
 // Función que dibuja el conjunto de Mandelbrot en su canvas
@@ -229,7 +223,7 @@ function drawMandelbrotSet() {
     }
   
     // Dibujar el punto rojo en el canvas pointCanvas
-    const pixel = complexToPixel(DEFAULT_COMPLEX);
+    const pixel = complexToPixel(default_complex);
     pixel.real = pixel.real + canvasBorder;
     pixel.imaginary = pixel.imaginary + canvasBorder;
     ctxPoint.clearRect(0, 0, pointCanvas[0].width, pointCanvas[0].height);
@@ -239,7 +233,7 @@ function drawMandelbrotSet() {
     ctxPoint.fill();
 
     //Mostrar en el textBox 'complex-number' el número complejo por defecto
-    updateTextBox(DEFAULT_COMPLEX);
+    updateTextBox(default_complex);
     drawJuliaSet();
 }
   
