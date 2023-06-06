@@ -21,7 +21,6 @@
 }
 
 #canvasMandelbrot {
-    
     z-index: 1; /* Establecer z-index para superponer el segundo canvas sobre el primero */
 }
 
@@ -29,14 +28,16 @@
     z-index: 2; /* Establecer z-index para que el primer canvas quede detrás del segundo canvas */
 }
 
-#canvasJul {
+.julia_container {
     border: 2px solid blue;
+    width: 300px;
+    height: 300px;
     display: inline-block; /* Colocar el tercer canvas en línea */
     position: relative; /* Establecer posición relativa para poder posicionar el rectángulo */
     margin-left: 320px; /* Margen izquierdo para separar el tercer canvas del segundo */
 }
 
-#label_container {
+.complex_container {
     width: 620px;
     position: relative;
     display: grid;
@@ -66,7 +67,7 @@
     margin-top: 10px;
 }
 
-#canvas_buttons{
+.canvas_buttons{
     width: 620px;
     position: relative;
     display: grid;

@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Conjunto de Mandelbrot</title>
-    <link rel=StyleSheet href="style/canvasStyle.css" type="text/css">
+    <title>Sets fractales</title>
+    <link rel=StyleSheet href="style/fractal_sets_style.css" type="text/css">
 </head>
 <body>
-    <div id="label_container">
+    <div class="complex_container">
         <label id="label_complex" for="complex_number">Número complejo:</label>
         <input type="text" id="complex_number" readonly>
         <input id="btnRefresh" type="button" onclick="location.reload()" value="Reiniciar">
@@ -21,12 +21,12 @@
             <canvas id="canvasJul" width="300" height="300"></canvas>
         </div>        
     </div> 
-    <div id="canvas_buttons">
+    <div class="canvas_buttons">
         <input type="button" id="btnMandelbrot" value="Seleccionar">
         <input type="button" id="btnJulia" value="Seleccionar">
     </div>
     <script src="lib/jquery.min.js"></script>
-    <script src="Prueba_complex.js"></script>
+    <script src="fractal_sets.js"></script>
 </body>
 </html>
 
