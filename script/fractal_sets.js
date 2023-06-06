@@ -68,6 +68,8 @@ let dragging = false;
 let mouseX = 0;
 let mouseY = 0; 
 let juliaComplex = default_complex;
+let sendX = 0;
+let sendY = 0;
 
 //Obtener las coordenadas del canvas de Mandelbrot
 const mandelbrotRect = canvasMandelbrot[0].getBoundingClientRect();
@@ -121,6 +123,8 @@ pointCanvas.on('mousemove', function(event) {
         let zAux2 = new Complex(zAux1.real.toFixed(2), zAux1.imaginary.toFixed(2));
         juliaComplex = zAux1;
         updateTextBox(zAux2);
+        sendX = zAux2.real;
+        sendY = zAux2.imaginary;
         
     }
 });
@@ -131,6 +135,15 @@ pointCanvas.on('mouseup', function() {
     drawJuliaSet();
 });
 
+//Función onclick para botón de mandelbrot
+$("#btnMandelbrot").click(function(){
+    window.location.href= "drawing_tool.html";
+})
+
+//Función onclick para botón de julia
+$("#btnJulia").click(function(){
+    window.location.href= "drawing_tool.html?real=" + encodeURIComponent(sendX) + "&imag=" + encodeURIComponent(sendY);
+})
 //Función que actualiza el textBox 'complex-number' en función de donde esté situado el punto rojo
 function updateTextBox(c) {
     $('#complex_number').val(c.toString());
