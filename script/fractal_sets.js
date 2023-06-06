@@ -1,51 +1,10 @@
+//Importar clase Complex
+import Complex from "./complex_class.js";
+
 // Obtener los elementos del DOM
 const canvasMandelbrot = $('#canvasMandelbrot');
 const pointCanvas = $('#pointCanvas');
 const canvasJul = $('#canvasJul');
-
-//Definición clase Complex
-class Complex {
-    constructor(real, imaginary) {
-      this.real = real;
-      this.imaginary = imaginary;
-    }
-    
-    square() {  //Método para elevar al cuadrado un número complejo dado
-      const real = this.real * this.real - this.imaginary * this.imaginary;
-      const imaginary = 2 * this.real * this.imaginary;
-      return new Complex(real, imaginary);
-    }
-  
-    add(c) {    //Método que suma a un número complejo dado un número complejo que recibe por parámetro
-      const real = this.real + c.real;
-      const imaginary = this.imaginary + c.imaginary;
-      return new Complex(real, imaginary);
-    }
-  
-    magnitude() {   //Devuelve el módulo del número complejo
-      return Math.sqrt(this.real * this.real + this.imaginary * this.imaginary);
-    }
-  
-    toString() {
-        if (this.real == 0 && this.imaginary == 0) return `0`;
-        if (this.real == 0 && this.imaginary != 0) return `${this.imaginary}i`;
-        if (this.real != 0 && this.imaginary == 0) return `${this.real}`;
-        if (this.real != 0 && this.imaginary < 0) return `${this.real} ${this.imaginary}i`;
-        if (this.real != 0 && this.imaginary > 0) return `${this.real} + ${this.imaginary}i`;
-    }
-  
-    subtract(c) {   //Método que resta a un número complejo dado un número complejo que recibe como parámetro
-      const real = this.real - c.real;
-      const imaginary = this.imaginary - c.imaginary;
-      return new Complex(real, imaginary);
-    }
-    
-    multiply(c) {   //Método que multiplica a un número complejo dado por un número complejo recibido como parámetro
-      const real = this.real * c.real - this.imaginary * c.imaginary;
-      const imaginary = this.real * c.imaginary + this.imaginary * c.real;
-      return new Complex(real, imaginary);
-    }
-  }
 
 // Variables para el dibujo del set de Mandelbrot y del set de Julia
 const max_iterations = 100;
@@ -70,14 +29,6 @@ let mouseY = 0;
 let juliaComplex = default_complex;
 let sendX = 0;
 let sendY = 0;
-
-//Obtener las coordenadas del canvas de Mandelbrot
-const mandelbrotRect = canvasMandelbrot[0].getBoundingClientRect();
-const mandelbrotRectLeft = mandelbrotRect.left;
-const mandelbrotRectTop = mandelbrotRect.top;
-const mandelbrotRectRight = mandelbrotRect.left + mandelbrotRect.width;
-const mandelbrotRectBottom = mandelbrotRect.top + mandelbrotRect.height;
-
 
 // Obtener el contexto de los canvas
 const ctxMandelbrot = canvasMandelbrot.get(0).getContext('2d');

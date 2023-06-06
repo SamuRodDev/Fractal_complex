@@ -6,8 +6,16 @@
     <link rel=StyleSheet href="../style/drawing_tool_style.css" type="text/css">
 </head>
 <body>
-    <label id="recepcion">No se ha recibido nada</label>
+    <div class="tool_container">
+        <label id="set_type">Conjunto de Mandelbrot</label><br>
+        <input id="btn_line" type="button" value="Trazar línea">
+        <input id="btn_channel" type="button" value="Trazar canal paralelo">
+    </div>
+    <div class="canvas_container">
+        <canvas id="canvasDrawing" width="1200" height="800"></canvas>
+    </div>
+    
     <script src="../lib/jquery.min.js"></script>
-    <script src="../script/drawing_tool.js"></script>
+    <script type="module" src="../script/drawing_tool.js"></script>
 </body>
 </html>
