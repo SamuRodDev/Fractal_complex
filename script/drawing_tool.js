@@ -1,5 +1,5 @@
 //Importar clase Complex
-import Complex from "./complex_class.js";
+import Complex from "./fractal_sets_tools.js";
 
 //Lógica para recibir datos de la anterior página
 const labelRec = $("#set_type");
@@ -15,14 +15,6 @@ if (realR && imagR) {
 
 //Variables para el dibujo del conjunto correspondiente
 const canvasDrawing = $("canvasDrawing");
-const max_iterations = 100;
-const default_min_x_mand = -2;
-const default_max_x_mand = 0.5;
-const default_min_y_mand = -1.25;
-const default_max_y_mand = 1.25;
-const default_min_x_julia = -1.75;
-const default_max_x_julia = 1.75;
-const default_min_y_julia = -1.75;
-const default_max_y_julia = 1.75;
+const ctxDrawing = canvasDrawing.get(0).getContext('2d');
 const default_complex = new Complex(0, 0);
 
