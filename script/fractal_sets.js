@@ -62,8 +62,8 @@ pointCanvas.on('mousemove', function(event) {
         let zAux2 = new Complex(zAux1.real.toFixed(2), zAux1.imaginary.toFixed(2));
         juliaComplex = zAux1;
         updateTextBox(zAux2);
-        sendX = zAux2.real;
-        sendY = zAux2.imaginary;
+        sendX = zAux1.real;
+        sendY = zAux1.imaginary;
         
     }
 });
