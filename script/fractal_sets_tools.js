@@ -52,7 +52,6 @@ const default_min_x_julia = -1.75;
 const default_max_x_julia = 1.75;
 const default_min_y_julia = -1.75;
 const default_max_y_julia = 1.75;
-const default_complex = new Complex(0, 0);
 let minX = default_min_x_mand;
 let maxX = default_max_x_mand;
 let minY = default_min_y_mand;

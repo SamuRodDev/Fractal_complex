@@ -32,46 +32,64 @@ pointCanvas.on('mousedown', function(event) {
   
 // Controlador de eventos para cuando se mueve el mouse
 pointCanvas.on('mousemove', function(event) {
+    // Verifica si se está arrastrando el punto
     if (dragging) {
+        // Calcula el desplazamiento en el eje X y en el eje Y
         const deltaX = event.offsetX - mouseX;
         const deltaY = event.offsetY - mouseY;
+
+        // Obtiene la posición actual del punto en el canvas
         const oldX = parseFloat(pointCanvas.attr('data-x'));
         const oldY = parseFloat(pointCanvas.attr('data-y'));
+
+        // Calcula los límites del canvas para evitar que el punto salga de la zona visible
         const centerAux = complexToPixel(default_complex, canvasMandelbrot);
         const leftAux = 0 - centerAux.real + pointRadius;
         const rightAux = canvasMandelbrot[0].width - centerAux.real - pointRadius;
         const topAux = 0 - centerAux.imaginary + pointRadius;
         const bottomAux = canvasMandelbrot[0].height - centerAux.imaginary - pointRadius;
+
+        // Calcula las nuevas coordenadas del punto
         let newX = oldX + deltaX;
         let newY = oldY + deltaY;
 
+        // Verifica si las nuevas coordenadas exceden los límites del canvas y las ajusta en caso necesario
         if (newX < leftAux) newX = leftAux;
         if (newX > rightAux) newX = rightAux;
         if (newY < topAux) newY = topAux;
         if (newY > bottomAux) newY = bottomAux;
 
+        // Actualiza la posición del punto en el canvas
         pointCanvas.css({left: newX + 'px', top: newY + 'px'});
         pointCanvas.attr('data-x', newX);
         pointCanvas.attr('data-y', newY);
-        mouseX = event.offsetX;
-        mouseY = event.offsetY; 
 
+        // Actualiza las coordenadas del mouse
+        mouseX = event.offsetX;
+        mouseY = event.offsetY;
+
+        // Calcula las coordenadas complejas correspondientes al punto actual
         let x = parseInt(newX + centerAux.real);
         let y = parseInt(newY + centerAux.imaginary);
         let zAux1 = pixelToComplex({x, y}, pointCanvas);
         let zAux2 = new Complex(zAux1.real.toFixed(2), zAux1.imaginary.toFixed(2));
+
+        // Actualiza la variable juliaComplex con las coordenadas complejas correspondientes
         juliaComplex = zAux1;
+
+        // Actualiza el cuadro de texto con las coordenadas complejas redondeadas
         updateTextBox(zAux2);
+
+        // Actualiza las variables sendX y sendY con las coordenadas complejas actuales
         sendX = zAux1.real;
         sendY = zAux1.imaginary;
-        drawJuliaSet(juliaComplex, canvasJul, ctxJulia);
-        
     }
 });
 
 // Controlador de eventos para cuando se suelta el botón del mouse
 pointCanvas.on('mouseup', function() {
     dragging = false;
+    drawJuliaSet(juliaComplex, canvasJul, ctxJulia);
     
 });
 
