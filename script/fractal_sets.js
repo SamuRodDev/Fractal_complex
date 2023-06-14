@@ -64,6 +64,7 @@ pointCanvas.on('mousemove', function(event) {
         updateTextBox(zAux2);
         sendX = zAux1.real;
         sendY = zAux1.imaginary;
+        drawJuliaSet(juliaComplex, canvasJul, ctxJulia);
         
     }
 });
@@ -71,7 +72,7 @@ pointCanvas.on('mousemove', function(event) {
 // Controlador de eventos para cuando se suelta el botón del mouse
 pointCanvas.on('mouseup', function() {
     dragging = false;
-    drawJuliaSet(juliaComplex, canvasJul, ctxJulia);
+    
 });
 
 //Función onclick para botón de mandelbrot

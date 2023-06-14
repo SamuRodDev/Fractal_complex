@@ -105,42 +105,55 @@ export function isInJuliaSet(c, z) {
 
 // Función que dibuja el conjunto de Julia en su canvas
 export function drawJuliaSet(juliaComplex, canvas ,context) {
+    const imageData = context.createImageData(canvas[0].width, canvas[0].height);
+    const data = imageData.data;
     let zJul = new Complex (0,0);
-    for (let x = 0; x < canvas[0].width; x++) {
-        for (let y = 0; y < canvas[0].height; y++) {
+    let index = 0;
+
+    for (let x = 0; x < canvas[0].width; x++){
+        for (let y = 0; y < canvas[0].height; y++){
+            index = (y * canvas[0].width + x) * 4;
+            zJul = pixelToComplex({x,y}, canvas);
+            const isInSet = isInJuliaSet(juliaComplex, zJul);
             minX = default_min_x_julia;
             maxX = default_max_x_julia;
             minY = default_min_y_julia;
             maxY = default_max_y_julia;
-            zJul = pixelToComplex({x, y}, canvas);
-            if (isInJuliaSet(juliaComplex, zJul)) {
-                context.fillStyle = 'black';
-            } else {
-                context.fillStyle = 'white';
-            }
-            context.fillRect(x, y, 1, 1);
+            
+            data[index] = isInSet ? 0 : 255;
+            data[index + 1] = isInSet ? 0 : 255;
+            data[index + 2] = isInSet ? 0 : 255;
+            data[index + 3] = 255;
         }
     }
     minX = default_min_x_mand;
     maxX = default_max_x_mand;
     minY = default_min_y_mand;
     maxY = default_max_y_mand;
+    context.putImageData(imageData, 0, 0);
 }
 
 // Función que dibuja el conjunto de Mandelbrot en su canvas
 export function drawMandelbrotSet(canvas, context) {
+    const imageData = context.createImageData(canvas[0].width, canvas[0].height);
+    const data = imageData.data;
     let c = new Complex (0,0);
-    for (let x = 0; x < canvas[0].width; x++) {      //Recorre el eje X del canvas
-      for (let y = 0; y < canvas[0].height; y++) {   //Recorre el eje Y del canvas
-        c = pixelToComplex({ x, y }, canvas);                 //Se convierte el píxel de coordenadas x e y en un número complejo
-        if (isInMandelbrotSet(c)) {                         //Comprueba que el número complejo forma parte del set de Mandelbrot
-          context.fillStyle = 'black';                    //Si es así, pintará el pixel de negro
-        } else {
-          context.fillStyle = 'white';                    //Si no es asi, pintará el pixel de blanco
+    let index = 0;
+
+    for (let x = 0; x < canvas[0].width; x++){
+        for (let y = 0; y < canvas[0].height; y++){
+            index = (y * canvas[0].width + x) * 4;
+            c = pixelToComplex({x, y}, canvas);
+            const isInSet = isInMandelbrotSet(c);
+
+            data[index] = isInSet ? 0 : 255;
+            data[index + 1] = isInSet ? 0 : 255;
+            data[index + 2] = isInSet ? 0 : 255;
+            data[index + 3] = 255;
         }
-        context.fillRect(x, y, 1, 1);                 //Una vez sabemos de qué color va a ser el pixel, se pinta el pixel
-      }
     }
+
+    context.putImageData(imageData, 0, 0);
 }
 
 export default Complex;
