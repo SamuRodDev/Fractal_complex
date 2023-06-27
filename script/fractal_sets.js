@@ -77,6 +77,11 @@ pointCanvas.on('mouseup', function() {
     redPoint.isDragging = false;
 });
 
+//Controlador de eventos para cuando se sale del canvas
+pointCanvas.on('mouseout', function(){
+    redPoint.isDragging = false;
+});
+
 //Función onclick para botón de mandelbrot
 $("#btnMandelbrot").click(function(){
     window.location.href= "drawing_tool.html";
