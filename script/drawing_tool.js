@@ -9,7 +9,7 @@ var imagR = parseFloat(urlParams.get("imag"));
 let juliaNumber = new Complex(realR, imagR);
 let juliaAux = new Complex(juliaNumber.real.toFixed(2), juliaNumber.imaginary.toFixed(2)); 
 let setType = 0;
-if (realR && imagR) {
+if ((realR && imagR) || (realR == 0 && imagR ==0)) {
     labelRec[0].innerText = "Conjunto de Julia correspondiente al número complejo: " + juliaAux.toString();
     setType = 1;
 }
