@@ -3,3 +3,36 @@
     width: 800px;
     height: 800px;
 }
+
+.tool_container {
+    width: 800px;
+    position: relative;
+    display: grid;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#setType{
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    width: auto;
+    justify-self: center;
+    margin-right: 10px;
+    font-size: x-large;
+}
+
+#btnChannel{
+    grid-column: 1;
+    grid-row: 2;
+    width: auto;
+    justify-self: center;
+    margin-top: 20px;
+}
+
+#btnBack {
+    grid-column: 2;
+    grid-row: 2;
+    width: auto;
+    justify-self: center;
+    margin-top: 20px;
+}
