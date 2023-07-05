@@ -1,5 +1,5 @@
 //Importar clase Complex y funciones para dibujar los sets
-import Complex, { drawJuliaSet, drawMandelbrotSet } from "./fractal_sets_tools.js";
+import Complex, { complexToPixel, drawJuliaSet, drawMandelbrotSet, pixelToComplex } from "./fractal_sets_tools.js";
 
 //Lógica para recibir datos de la anterior página
 const labelRec = $("#setType");
@@ -57,7 +57,7 @@ canvasDraw.on('click', function(event){
         } else if (canvasHandler == 2){
             secondPoint = {mouseX, mouseY};
             drawCircle(secondPoint);
-            // drawLine(firstPoint, secondPoint);
+            drawLine(firstPoint, secondPoint);
             canvasHandler = 3;
         } else if (canvasHandler == 3){
             thirdPoint = {mouseX, mouseY};
@@ -77,6 +77,119 @@ function drawCircle(point){
 }
 
 //Función que dibuja una línea sobre el canvas
-// function drawLine(point1, point2){
-    
-// }
+function drawLine(point1, point2){
+    let a = {"x": point1.mouseX, "y": point1.mouseY};
+    let b = {"x": point2.mouseX, "y": point2.mouseY};
+    let minValue = 0;
+    let maxValue = canvasDraw[0].height;
+    let slopeVal;
+    let aExt = {"x": minValue, "y": minValue};
+    let bExt = {"x": maxValue, "y": maxValue};
+    a = changePlane(a);
+    b = changePlane(b);
+    if(a.x == b.x){     //Línea vertical
+        aExt.x = a.x;
+        bExt.x = a.x;  
+    }
+    if(a.y == b.y){     //Línea horizontal
+        aExt.y = a.y; 
+        bExt.y = a.y;
+    } 
+    slopeVal = defineSlope(a, b);
+    if((a.x > b.x && a.y > b.y) || (a.x < b.x && a.y < b.y)){ //Pendiente negativa
+        if(a.x < b.x){
+            aExt.y = defineFirstY(aExt.x, a, slopeVal);
+            if(aExt.y < minValue || aExt.y > maxValue) {
+                aExt.y = minValue;
+                aExt.x = defineFirstX(aExt.y, a, slopeVal);
+            }
+            bExt.y = defineSecondY(b, bExt.x, slopeVal);
+            if(bExt.y < minValue || bExt.y > maxValue){
+                bExt.y = maxValue;
+                bExt.x = defineSecondX(b, bExt.y, slopeVal);
+            }
+        }else{
+            aExt.y = defineFirstY(aExt.x, b, slopeVal);
+            if(aExt.y < minValue || aExt.y > maxValue) {
+                aExt.y = minValue;
+                aExt.x = defineFirstX(aExt.y, b, slopeVal);
+            }
+            bExt.y = defineSecondY(a, bExt.x, slopeVal);
+            if(bExt.y < minValue || bExt.y > maxValue){
+                bExt.y = maxValue;
+                bExt.x = defineSecondX(a, bExt.y, slopeVal);
+            }
+        }
+    }else{  //Pendiente positiva
+        aExt.x = maxValue;
+        bExt.x = minValue;
+        if(a.x < b.x){
+            aExt.y = defineFirstY(aExt.x, a, slopeVal);
+            if(aExt.y < minValue || aExt.y > maxValue) {
+                aExt.y = minValue;
+                aExt.x = defineFirstX(aExt.y, a, slopeVal);
+            }
+            bExt.y = defineSecondY(b, bExt.x, slopeVal);
+            if(bExt.y < minValue || bExt.y > maxValue){
+                bExt.y = maxValue;
+                bExt.x = defineSecondX(b, bExt.y, slopeVal);
+            }
+        }else{
+            aExt.y = defineFirstY(aExt.x, b, slopeVal);
+            if(aExt.y < minValue || aExt.y > maxValue) {
+                aExt.y = minValue;
+                aExt.x = defineFirstX(aExt.y, b, slopeVal);
+            }
+            bExt.y = defineSecondY(a, bExt.x, slopeVal);
+            if(bExt.y < minValue || bExt.y > maxValue){
+                bExt.y = maxValue;
+                bExt.x = defineSecondX(a, bExt.y, slopeVal);
+            }
+        }
+    }
+    //Cambiamos los valores para adaptarse al canvas
+    aExt = changePlane(aExt);
+    bExt = changePlane(bExt);
+
+    //Dibujar la línea
+    ctxDraw.beginPath();
+    ctxDraw.moveTo(aExt.x, aExt.y);
+    ctxDraw.lineTo(bExt.x, bExt.y);
+    ctxDraw.strokeStyle = color;
+    ctxDraw.stroke();
+}
+
+//Función que transforma un punto del origen del canvas al origen del plano o viceversa
+function changePlane({x, y}){
+    return {"x":y, "y": x};
+}
+
+//Función que defina la pendiente entre dos puntos
+function defineSlope(a, b){
+    let slope = (b.y - a.y) / (b.x - a.x);
+    return slope
+}
+
+//Función que halla x1
+function defineFirstX(ay, b, slope){
+    let ax = -(((b.y - ay) / slope) - b.x);
+    return ax;
+}
+
+//Función que halla y1
+function defineFirstY(ax, b, slope){
+    let ay = -(slope * (b.x - ax) - b.y);
+    return ay;
+}
+
+//Función que halla x2
+function defineSecondX(a, by, slope){
+    let bx = (by - a.y) / slope + a.x;
+    return bx;
+}
+
+//Función que halla y2
+function defineSecondY(a, bx, slope){
+    let by = slope * (bx - a.x) + a.y;
+    return by;
+}
