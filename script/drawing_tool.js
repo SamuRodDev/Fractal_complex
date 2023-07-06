@@ -57,7 +57,6 @@ canvasDraw.on('click', function(event){
             drawCircle(firstPoint);
             canvasHandler = 2;
         } else if (canvasHandler == 2){
-            lineType = 0;
             secondPoint = {"x": x, "y": y};
             drawCircle(secondPoint);
             slopeVal = defineSlope(firstPoint, secondPoint);
@@ -73,6 +72,7 @@ canvasDraw.on('click', function(event){
             btnChannel.attr('disabled', false);
             canvasHandler = 0;
         }
+        lineType = 0;
     } 
 })
 
@@ -92,6 +92,7 @@ function drawLine(point, slope, lineType){
     //Dibujar la línea
     ctxDraw.beginPath();
     if(lineType == 1) ctxDraw.setLineDash([2, 2]);
+    else ctxDraw.setLineDash([]);
     ctxDraw.moveTo(aExt.x, aExt.y);
     ctxDraw.lineTo(bExt.x, bExt.y);
     ctxDraw.strokeStyle = color;
